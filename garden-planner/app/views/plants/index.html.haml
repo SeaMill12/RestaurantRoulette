@@ -1,0 +1,41 @@
+-#  This file is app/views/plants/index.html.haml
+%div.row{:style => "padding: .1%"}
+  %div.col-lg-2.5
+    %hr
+    
+    %br
+      
+    %div.row{:style => "background-color: white; padding: 10px;"}
+      = form_tag plants_path do
+        = label :plant, :plant_name, "Type"
+        = text_field :plant, 'plant_name'
+        -#= label :plant, :plant_size, 'Price'
+        -#= select :plant, :plant_size, ['$','$$','$$$','$$$$']
+        -#= label :plant, :plant_size, 'Rating'
+        -#= select :plant, :plant_size, ['1 Star and Up','Two Star and Up','3 Star and Up','4 Star and Up','5 Star']
+        = label :plant, :plant_size, 'Location'
+        = text_field :distances, 'location'
+        %br
+        %br
+        %br
+        %button{:class => "btn btn-pot", :id => "Spin the Wheel"}=link_to "Spin the Wheel", plants_path(:search=>"burrito", :location=>"Pueblo")
+      %br
+          
+              
+              
+        
+  %div.col-lg-10
+  
+    %h1.tryy
+      Old Chicago
+      - jag = @image
+    =image_tag jag, :class=> "imager"
+    - @rep
+    %br
+    %br
+    %li.btn.btn-default.buttonn
+      = link_to plants_path, class: "link-to-button-dark" do
+        %i.fa.fa-bullseye
+        Spin the Wheel
+      
+    

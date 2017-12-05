@@ -1,0 +1,24 @@
+-# edit.html.haml using partial
+%div.row{:style => "padding-left: 13px;"}
+  %h2 Edit "#{@plant.plant_name}"
+
+= form_tag plant_path(@plant), :method => :put do
+
+  = label :plant, :plant_name, 'Plant Name'
+  = text_field :plant, 'plant_name'
+
+  = label :plant, :plant_size, 'Plant Size'
+  = select :plant, :plant_size, ['Large Pot','Medium Pot','Small Pot','Small plot of Land', "Medium Plot of Land", "Large Plot of Land", "Acres"]
+
+  = label :plant, :plant_date, 'Planted On '    #if issues change Planted On to Released On
+  = date_select :plant, :plant_date
+  
+  %br
+  %br
+  %li.btn.btn-default
+    = link_to plants_path, class: "link-to-button-dark" do
+      %i.fa.fa-arrow-left
+      Back To Garden
+  %submit.btn.btn-primary
+    %i.fa.fa-refresh
+    Update

@@ -1,0 +1,58 @@
+%div.row{:style => "padding-left: 13px;"}
+  %h2 Create New Garden
+
+= form_tag gardens_path do
+
+  = label :garden, :garden_name, 'Title', id: "Garden Name"
+  = text_field :garden, 'garden_name'
+  
+  = label :garden, :size_x, 'Garden Size x'
+  = text_field :garden, 'size_x'
+  = label :garden, :size_y, 'Garden Size y'
+  = text_field :garden, 'size_y'
+
+  = label :garden, :garden_date, 'Gardened On'    #if issues change Gardened On to Released On
+  = date_select :garden, :garden_date
+  
+  %br
+  %br
+  %li.btn.btn-default
+    = link_to plants_path, class: "link-to-button-dark", id: "back" do
+      %i.fa.fa-arrow-left
+      Back To Garden
+  = submit_tag 'Save', :class=> "btn btn-primary"
+
+    
+  
+-#                                                                                 if an invalid entry is submitted, it will break your database. This button is disabled until we add checks for good data.
+-#                                                                                 To re-enable button, remove the "pointer-events: none;" style.
+-#                                                                                 if you break your database here are the commands to fix it in your c9 console:
+-#                                                                              
+-#                                                                                 ~/root_of_your_project $ rails db
+-#                                                                              
+-#                                                                                 sqlite> .headers on
+-#                                                                              
+-#                                                                                 sqlite> .mode column                                                                              
+-#                                                                                 sqlite> select * from gardens;
+-#                                                                              
+-#                                                                                 Now find the bad columns, they'll probably have empty columns. Then pick the right delete command, these will remove
+-#                                                                                 all rows where there are blank columns of the type of column you select below. 
+-#                                                                              
+-#                                                                                 sqlite> delete from gardens where garden_name = "";
+-#                                                                              
+-#                                                                                 Or this one
+-#                                                                              
+-#                                                                                 sqlite> delete from gardens where garden_size = "";
+-#                                                                              
+-#                                                                                 Or this one
+-#                                                                              
+-#                                                                                 sqlite> delete from gardens where garden_date = "";
+-#                                                                              
+-#                                                                                 now check that the offending rows are gone, otherwise use another delete command
+-#                                                                              
+-#                                                                                 sqlite> select * from gardens;
+-#                                                                              
+-#                                                                                 after all bad rows are gone, exit the database console
+-#                                                                              
+-#                                                                                 sqlite> .exit
+-#

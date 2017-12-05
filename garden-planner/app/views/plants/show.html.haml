@@ -1,0 +1,38 @@
+-# in app/views/plants/show.html.haml
+%div{:style => "padding-left: 13px;"}
+  %div.row
+    %h2 #{@plant.plant_name}
+  
+  %div.row
+    %h4 Details
+    %ul#details
+      %li
+        Pot or Plot Size:
+        = @plant.plant_size
+      %li
+        Planted on:
+        = @plant.plant_date.strftime("%B %d, %Y")
+      %li
+        Water Frequency:
+        = @plant.water_freq
+  
+  %div.row
+    %h4 Description:
+    %p#description= @plant.description
+  
+  
+  %div.row{:style => "margin-top: 15px; padding-left: 2px;"}
+    %li.btn.btn-default
+      = link_to plants_path, class: "link-to-button-dark" do
+        %i.fa.fa-arrow-left
+        Back To Garden
+  
+    %li.btn.btn-primary 
+      = link_to edit_plant_path(@plant), class: "link-to-button" do
+        %i.fa.fa-pencil
+        Edit
+    
+    %li.btn.btn-danger
+      = link_to plant_path(@plant), :method => :delete, :confirm => 'Are you sure?', class: "link-to-button" do
+        %i.fa.fa-trash
+        Delete
