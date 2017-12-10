@@ -16,6 +16,7 @@ class PlantsController < ApplicationController
   end
 
   def index
+    @pplant
     @rowLenth = 6
     @potSet= 0
     @gardens = Garden.all
@@ -37,48 +38,36 @@ class PlantsController < ApplicationController
     
     if params[:search] != nil
       url = "https://api.yelp.com/v3/businesses/search"
-      term = "burrito"
-      location = params[:location]
+      term = params[:search]
+      location = "Denver"
+      @mut = term
       params = {
         open_now: true,
         term: term,
-        latitude: 30,
-        longitude: 104,
+        location: location,
         limit: 50
       }
       
       response = HTTP.auth(bearer_token).get(url, params: params)
       
-      obj = response.parse
-      obj['businesses'].each do |business|
-        puts business
-        if !business.has_key? 'price' then
-          business[:price] = "No Price Data Yet"
-        end
-      end
       
-      obj
+      obj = JSON.parse(response)
+      
+      num = rand(50)
+      j = 0
+      obj['businesses'].each do |business|
+        vary = business.values
+        if j == num
+          addr = vary[11].values
+          @gut = vary[1]
+          @tut = vary[2]
+          
+          #@mut = addr[0]
+        end
+        j = j + 1
+      end
     end
   end
-    
-  
-    
-
-    if @sort_by
-      @plants = Plant.order(@sort_by)
-      case @sort_by
-      when 'plant_name'
-        @plant_name_hilite = 'hilite'
-      when 'plant_date'
-        @plant_date_hilite = 'hilite'
-      end
-    else
-      @plants = Plant.all
-    end
-    
-    if !@plant_sizes
-      @plant_sizes = Hash.new
-    end
 
   def new
     # default: render 'new' template
@@ -136,14 +125,6 @@ class PlantsController < ApplicationController
     response = HTTP.auth(bearer_token).get(url, params: params)
     response.parse
   end
-  
-  def business(business_id)
-    url = "#{API_HOST}#{BUSINESS_PATH}#{business_id}"
-
-    response = HTTP.auth(bearer_token).get(url)
-    response.parse
-  end
-  
   
   
   command = ARGV

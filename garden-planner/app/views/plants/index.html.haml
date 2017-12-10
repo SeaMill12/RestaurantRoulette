@@ -8,7 +8,7 @@
     %div.row{:style => "background-color: white; padding: 10px;"}
       = form_tag plants_path do
         = label :plant, :plant_name, "Type"
-        = text_field :plant, 'plant_name'
+        = text_field :plant, ''
         -#= label :plant, :plant_size, 'Price'
         -#= select :plant, :plant_size, ['$','$$','$$$','$$$$']
         -#= label :plant, :plant_size, 'Rating'
@@ -18,7 +18,8 @@
         %br
         %br
         %br
-        %button{:class => "btn btn-pot", :id => "Spin the Wheel"}=link_to "Spin the Wheel", plants_path(:search=>"burrito", :location=>"Pueblo")
+        = submit 
+        -#%button{:class => "submit", :id => "Spin the Wheel"}=link_to "Spin the Wheel", plants_path(:search=>"#{:plant}", :location=>"#{:distances}")
       %br
           
               
@@ -27,15 +28,12 @@
   %div.col-lg-10
   
     %h1.tryy
-      Old Chicago
-      - jag = @image
+      =@gut
+      %br
+      - jag = @tut
+      =@mut
     =image_tag jag, :class=> "imager"
-    - @rep
     %br
     %br
-    %li.btn.btn-default.buttonn
-      = link_to plants_path, class: "link-to-button-dark" do
-        %i.fa.fa-bullseye
-        Spin the Wheel
       
     
