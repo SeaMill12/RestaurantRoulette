@@ -18,8 +18,7 @@
         %br
         %br
         %br
-        = submit 
-        -#%button{:class => "submit", :id => "Spin the Wheel"}=link_to "Spin the Wheel", plants_path(:search=>"#{:plant}", :location=>"#{:distances}")
+        %button{:class => "submit", :id => "Spin the Wheel"}=link_to "Spin the Wheel", plants_path(:search=>"#{:plant_name}", :location=>"#{:distances}")
       %br
           
               
